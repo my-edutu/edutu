@@ -159,9 +159,60 @@ const Dashboard: React.FC<DashboardProps> = ({
   ];
 
   const goals = [
-    { title: "Complete Python Course", progress: 75, deadline: "Next week" },
-    { title: "Apply to 5 Scholarships", progress: 40, deadline: "This month" },
-    { title: "Build Portfolio Website", progress: 20, deadline: "Next month" }
+    {
+      title: 'Complete Python Course',
+      progress: 75,
+      deadline: 'Next week',
+      category: 'Skill sprint',
+      description: 'Lock in your Python fundamentals so you can ship scripts faster.',
+      nextAction: 'Finish data structures module',
+      momentum: '3 deep work blocks booked',
+      impact: 'Opens up data internship pathway',
+      Icon: Sparkles,
+    },
+    {
+      title: 'Apply to 5 Scholarships',
+      progress: 40,
+      deadline: 'This month',
+      category: 'Funding push',
+      description: 'Position yourself for fully funded programs with a consistent pipeline.',
+      nextAction: 'Shortlist 2 priority awards',
+      momentum: 'Essays 1/3 drafted',
+      impact: 'Covers tuition for next academic year',
+      Icon: BarChart3,
+    },
+    {
+      title: 'Build Portfolio Website',
+      progress: 20,
+      deadline: 'Next month',
+      category: 'Brand lab',
+      description: 'Craft a live portfolio that proves your skills to mentors and recruiters.',
+      nextAction: 'Design the hero section',
+      momentum: 'UI kit ready to deploy',
+      impact: 'Boosts credibility for remote gigs',
+      Icon: Zap,
+    },
+  ];
+
+  const goalThemes = [
+    {
+      background: 'linear-gradient(135deg, #4338CA 0%, #6366F1 50%, #5B21B6 100%)',
+      glow: 'linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(99,102,241,0.14) 50%, rgba(67,56,202,0.22) 100%)',
+      progressColor: '#FACC15',
+      progressTrack: 'rgba(255,255,255,0.18)',
+    },
+    {
+      background: 'linear-gradient(135deg, #0F766E 0%, #14B8A6 45%, #0F766E 100%)',
+      glow: 'linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(20,184,166,0.16) 50%, rgba(15,118,110,0.22) 100%)',
+      progressColor: '#A7F3D0',
+      progressTrack: 'rgba(255,255,255,0.2)',
+    },
+    {
+      background: 'linear-gradient(135deg, #EA580C 0%, #F97316 40%, #F59E0B 100%)',
+      glow: 'linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(251,146,60,0.14) 45%, rgba(234,88,12,0.22) 100%)',
+      progressColor: '#FDE68A',
+      progressTrack: 'rgba(255,255,255,0.22)',
+    },
   ];
 
   const handleViewMoreAchievements = () => {
@@ -351,49 +402,92 @@ const Dashboard: React.FC<DashboardProps> = ({
           </Button>
         </Card>
 
-        {/* Current Goals */}
-        <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} shadow-sm`}>
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <Target size={24} className="text-primary" />
-              <h2 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Your Goals</h2>
-            </div>
-            <Button 
-              onClick={onAddGoal}
-              className="inline-flex items-center gap-2 px-4 py-2"
-            >
-              <Plus size={16} />
-              Add Goal
-            </Button>
-          </div>
-          <div className="space-y-5">
-            {goals.map((goal, index) => (
-              <div 
-                key={index} 
-                className={`animate-slide-up cursor-pointer hover:${isDarkMode ? 'bg-gray-700' : 'bg-gray-50'} p-4 -m-4 rounded-2xl transition-all group`}
-                style={{ animationDelay: `${index * 100}ms` }}
-                onClick={() => onGoalClick(goal.title)}
-              >
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>{goal.title}</h3>
-                  <div className="flex items-center gap-2">
-                    <span className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{goal.deadline}</span>
-                    <ChevronRight size={16} className="text-gray-400 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-                <div className={`w-full ${isDarkMode ? 'bg-gray-600' : 'bg-gray-200'} rounded-full h-3 mb-2`}>
-                  <div
-                    className="bg-gradient-to-r from-primary to-accent h-3 rounded-full transition-all duration-500 relative overflow-hidden"
-                    style={{ width: `${goal.progress}%` }}
-                  >
-                    <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
-                  </div>
-                </div>
-                <div className="text-sm text-primary font-medium">
-                  {goal.progress}% complete
+        {/* Focus this week */}
+        <Card className="p-0 border-none bg-transparent shadow-none hover:shadow-none">
+          <div className="flex flex-col gap-6 p-5 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <Target size={22} className="text-brand-600" />
+                <div>
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Focus this week</h2>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Curated pushes that move the needle on your ambition.</p>
                 </div>
               </div>
-            ))}
+              <div className="flex items-center gap-2">
+                <span className="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">Stay consistent</span>
+                <Button variant="primary" size="sm" onClick={onAddGoal}>
+                  <Plus size={14} className="mr-1" />
+                  Add goal
+                </Button>
+              </div>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {goals.map((goal, index) => {
+                const theme = goalThemes[index % goalThemes.length];
+                const progress = Math.min(Math.max(goal.progress, 0), 100);
+                const progressAngle = progress * 3.6;
+                const ringStyle = {
+                  background: `conic-gradient(${theme.progressColor} ${progressAngle}deg, ${theme.progressTrack} ${progressAngle}deg 360deg)`,
+                };
+                const Icon = goal.Icon;
+
+                return (
+                  <button
+                    key={goal.title}
+                    type="button"
+                    onClick={() => onGoalClick(goal.title)}
+                    className="group relative overflow-hidden rounded-3xl text-left transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/80"
+                    style={{
+                      animationDelay: `${index * 80}ms`,
+                      background: theme.background,
+                    }}
+                  >
+                    <div
+                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      style={{ background: theme.glow }}
+                    />
+                    <div className="relative z-10 flex h-full flex-col gap-6 p-6 text-white">
+                      <div className="flex items-start justify-between gap-3">
+                        <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/80">
+                          <Icon size={14} className="opacity-80" />
+                          {goal.category}
+                        </span>
+                        <ChevronRight className="h-5 w-5 text-white/60 transition-transform duration-300 group-hover:translate-x-1" />
+                      </div>
+
+                      <div className="space-y-2">
+                        <h3 className="text-xl font-semibold leading-snug">{goal.title}</h3>
+                        <p className="text-sm text-white/80">{goal.description}</p>
+                        <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
+                          <CheckCircle2 size={14} className="opacity-80" />
+                          {goal.impact}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-wrap items-end justify-between gap-6 pt-2">
+                        <div className="flex items-center gap-4">
+                          <div className="relative flex h-16 w-16 items-center justify-center">
+                            <div className="absolute inset-0 rounded-full opacity-70" style={ringStyle} />
+                            <div className="absolute inset-[5px] rounded-full bg-white/15 backdrop-blur-md" />
+                            <span className="relative text-sm font-semibold text-white">{progress}%</span>
+                          </div>
+                          <div>
+                            <p className="text-xs uppercase text-white/70">Momentum</p>
+                            <p className="text-sm font-medium text-white">{goal.momentum}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs uppercase text-white/70">Next action</p>
+                          <p className="text-sm font-semibold text-white">{goal.nextAction}</p>
+                          <p className="mt-2 text-xs text-white/70">Due {goal.deadline}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </Card>
 
